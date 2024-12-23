@@ -50,7 +50,7 @@ def keep_straight():
 # Here is where your code starts
 left_motor.on(15)
 right_motor.on(15)
-# gyro_sensor_in3.reset()
+gyro_sensor_in3.reset()
 print("gyro reset")
 while True:
     if not reached_turn():
@@ -60,5 +60,15 @@ while True:
         time.sleep(1)
     else:
         print("reached turn")
-        left_motor.off()
-        right_motor.off()
+        left_motor.on(-5)
+        right_motor.on(-5)
+        time.sleep(1.0)
+        gyro_sensor_in3.reset()
+        while gyro_sensor_in3.angle < 90:
+            left_motor.on(5)
+            right_motor.on(0)
+            time.sleep(.1)
+        left_motor.on(0)
+        right_motor.on(0)
+        time.sleep(.5)
+        gyro_sensor_in3.reset()
